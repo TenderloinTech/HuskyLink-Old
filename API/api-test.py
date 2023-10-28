@@ -15,3 +15,8 @@ def testCreateAccount(user, password):
 
 print(testCreateAccount("nick", "bob123")) # Expected to return "Username exists"
 print(testCreateAccount(f"demouser{str(random.randint(0,100000000))}", "mypassword123")) # Should always work
+
+def testListUsers():
+    return requests.get("http://localhost:5000/api/v1/listAllUsers").json()
+
+print(testListUsers())
