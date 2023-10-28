@@ -29,7 +29,7 @@ def login():
             return Response(json.dumps({"result": {"password": False}}), content_type="application/json")
         if res[0][1] == password:
             return Response(json.dumps({"result": {"password": True}}), content_type="application/json")
-    return Response(json.dumps({"result": {"password": False}}), content_type="application/json")
+    return Response(json.dumps({"result": {"password": False, "returnedPassword": password}}), content_type="application/json")
 
 @app.route("/api/v1/createAccount", methods=["POST"])
 def create():
@@ -111,6 +111,23 @@ def listRequests():
         res = cur.fetchall()
         conn.commit()
         return Response(json.dumps(res), content_type="application/json")
+
+# @app.route("/api/v1/sortRequestsByTags") # ?tags=this,this,and,that
+# def sortByTags():
+#     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
+
+#     listOfTags = request.args.get("tags").split(",")
+
+#     with conn.cursor() as cur:
+#         cur.execute(f"select * from requests")
+#         res = cur.fetchall()
+#         conn.commit()
+
+#         for x in res:
+#             if x[]
+
+#         return Response(json.dumps(res), content_type="application/json")
+
 
 # Run the app
 if __name__ == '__main__':

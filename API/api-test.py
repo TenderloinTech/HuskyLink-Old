@@ -1,4 +1,5 @@
 import requests
+import json
 import random
 
 endpoint = "143.198.129.9"
@@ -24,11 +25,14 @@ def testListUsers():
 print(testListUsers())
 
 def testCreateRequest(username, title, description, tags):
-    return requests.post(f"http://{endpoint}:5000/api/v1/createNewRequest", data={"username": username, "title": title, description: "description", "tags": tags})
+    return requests.post(f"http://{endpoint}:5000/api/v1/createNewRequest", data={"username": username, "title": title, description: "description", "tags": tags}).json()
 
-print(testCreateRequest("trent", "I need help with my code!", "pls help me lmao", "{'reactConsole', 'khoury'}"))
+print(testCreateRequest("trent", "I need help with my code!", "pls help me lmao", json.dumps(['reactConsole', 'khoury'])))
 
 def testListRequests():
     return requests.get(f"http://{endpoint}:5000/api/v1/listRequests").json()
 
 print(testListRequests())
+
+def testTagSort():
+    retu
