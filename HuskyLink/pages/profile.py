@@ -7,6 +7,7 @@ import reflex as rx
 
 @template(route="/profile", title="Your Profile")
 def profile() -> rx.Component:
+    
     return rx.vstack(
         rx.heading("Your Profile", font_size="3em"),
         rx.text("Welcome to Reflex!"),
@@ -18,6 +19,5 @@ def profile() -> rx.Component:
         rx.text("Major:"),  # add text field for major
         rx.text("Interests:"),  # add text field for interests
         rx.text("Bio:"),  # add text field for bio
-        rx.button("Save Changes", color="primary"),
-        rx.button("Cancel", color="secondary"),
+        rx.button("Save Changes", color="primary", size="lg"),
     )
