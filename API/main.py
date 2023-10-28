@@ -63,6 +63,17 @@ def create():
         conn.commit()
     return Response(json.dumps({"result": {"success": True, "message": "ok", "createdAt": createdAt}}), content_type="application/json")
 
+@app.route("/api/v1/getUserInfo/<user>", methods=["GET"])
+def uInfo(user):
+    conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
+
+    with conn.cursor() as cur:
+        cur.execute(f"select username, realName, createdAt, userType, profileImageURL, isBanned, userRole from users where username='{user}'")
+        res = cur.fetchall()
+        conn.commit()
+        return Response(json.dumps(res), content_type="application/json")
+
+
 @app.route("/api/v1/listAllUsers", methods=["GET"])
 def lists():
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])

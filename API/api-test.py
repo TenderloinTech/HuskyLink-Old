@@ -35,4 +35,5 @@ def testListRequests():
 print(testListRequests())
 
 def testTagSort():
-    retu
+    r = requests.get()
+    return
