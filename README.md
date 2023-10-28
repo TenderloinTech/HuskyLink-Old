@@ -3,6 +3,7 @@
 Husky Link is a web-app that lets you choose your coding partners anonymously!
 
 Check out our [**Website**](https://tenderloin.tech)
+
 Check out our [**Instagram**](https://www.instagram.com/tenderloin.tech/)
 
 
