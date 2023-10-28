@@ -10,8 +10,8 @@ def login() -> rx.Component:
     Returns:
         The UI for the dashboard page.
     """
-    if State.loggedIn is True:
-        return rx.redirect("/dashboard")
+    # if State.loggedIn is True:
+    #     return rx.redirect("/dashboard")
     return rx.vstack(
         rx.heading("Login Page", font_size="3em"),
         rx.text("Please log in!"),
@@ -23,5 +23,7 @@ def login() -> rx.Component:
             rx.text("Password:"),  # add text field for password
             rx.input(id="password", placeholder="Password", size="lg"),
         ),
-        rx.button("Login", color="primary", size="lg", on_click=State.loginAuth),
+        rx.button("Login", color="primary", size="lg", ),
     )
+
+# on_click=State.loginAuth
