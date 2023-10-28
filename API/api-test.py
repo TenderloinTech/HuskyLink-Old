@@ -9,8 +9,8 @@ print(testLogin("sj", "s")) # Expected to return False
 print(testLogin("james", "s")) # Expected to return False
 print(testLogin("james", "admin123")) # Expected to return True
 
-def testCreateAccount(user, password):
-    r = requests.post("http://localhost:5000/api/v1/createAccount", data={"username": user, "password": password})
+def testCreateAccount(user, password, realName, userType, profileImageURL, userRole):
+    r = requests.post("http://localhost:5000/api/v1/createAccount", data={"username": user, "password": password, "realName": realName, "userType": userType, "profileImageURL": profileImageURL})
     return r.json()["result"]
 
 print(testCreateAccount("nick", "bob123")) # Expected to return "Username exists"

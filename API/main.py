@@ -58,9 +58,9 @@ def create():
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
-        cur.execute(f"insert into users (username, realName, pass, createdAt, userType, profileImageURL, isBanned, userRole) values ({user}, {realName}, {password}, {createdAt}, {userType}, {profileImageURL}, {isBanned}, {userRole})")
+        cur.execute(f"insert into users (username, realName, pass, createdAt, userType, profileImageURL, isBanned,) values ('{user}', '{realName}', '{password}', {createdAt}, '{userType}', '{profileImageURL}', {isBanned})")
         conn.commit()
-    return Response(json.dumps({"result": {"success": True, "message": "ok"}}), content_type="application/json")
+    return Response(json.dumps({"result": {"success": True, "message": "ok", "createdAt": createdAt}}), content_type="application/json")
 
 @app.route("/api/v1/listAllUsers", methods=["GET"])
 def lists():
