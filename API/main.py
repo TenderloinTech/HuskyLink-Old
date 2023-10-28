@@ -31,13 +31,16 @@ def login():
 
 @app.route("/api/v1/createAccount", methods=["POST"])
 def create():
+
+    # Parameters Required
     user = request.form.get('username')
     password = request.form.get('password')
+    
 
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
-        cur.execute(f"select * from testlogin where username='{user}'")
+        cur.execute(f"insert into users where username='{user}'")
         res = cur.fetchall()
         conn.commit()
         if len(res) != 0:
@@ -55,7 +58,15 @@ def create():
 def lists():
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
-    users = []
+    with conn.cursor() as cur:
+        cur.execute(f"select username from testlogin")
+        res = cur.fetchall()
+        conn.commit()
+        return Response(json.dumps(res), content_type="application/json")
+
+@app.route("/api/v1/sortByTag/<tag>")
+def sortTag(tag):
+    conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
         cur.execute(f"select username from testlogin")
