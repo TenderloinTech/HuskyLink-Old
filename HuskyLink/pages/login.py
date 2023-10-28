@@ -2,6 +2,7 @@
 from HuskyLink.templates import template
 
 import reflex as rx
+import requests
 
 
 @template(route="/login", title="Login")
@@ -11,6 +12,10 @@ def login() -> rx.Component:
     Returns:
         The UI for the dashboard page.
     """
+    # def handle_login():
+        # print("Login button clicked!")
+    
+        
     return rx.vstack(
         rx.heading("Login Page", font_size="3em"),
         rx.text("Please log in!"),
