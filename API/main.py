@@ -23,6 +23,8 @@ def login():
         cur.execute(f"select * from testlogin where username='{user}'")
         res = cur.fetchall()
         conn.commit()
+        if len(res) != 1:
+            return Response(json.dumps({"result": {"password": False}}), content_type="application/json")
         if res[0][1] == password:
             return Response(json.dumps({"result": {"password": True}}), content_type="application/json")
     return Response(json.dumps({"result": {"password": False}}), content_type="application/json")
