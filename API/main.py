@@ -29,24 +29,38 @@ def login():
             return Response(json.dumps({"result": {"password": True}}), content_type="application/json")
     return Response(json.dumps({"result": {"password": False}}), content_type="application/json")
 
-@app.route("/api/v1/createAccount")
+@app.route("/api/v1/createAccount", methods=["POST"])
 def create():
     user = request.form.get('username')
     password = request.form.get('password')
+
+    conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
         cur.execute(f"select * from testlogin where username='{user}'")
         res = cur.fetchall()
         conn.commit()
-        if res[0][0] == user:
-            return Response(json.dumps({"result": {"success": False, "message": "Username exists"}})), 400
+        if len(res) != 0:
+            if res[0][0] == user:
+                return Response(json.dumps({"result": {"success": False, "message": "Username exists"}})), 400
 
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
-        cur.execute(f"insert into testLogin (username, password) values ('{user}', '{password}')")
+        cur.execute(f"insert into testLogin (username, pass) values ('{user}', '{password}')")
         conn.commit()
-    return Response(json.dumps({"result": {"success": True}}), content_type="application/json")
+    return Response(json.dumps({"result": {"success": True, "message": "ok"}}), content_type="application/json")
+
+@app.route("/api/v1/listAllUsers", methods=["GET"])
+def listUsers():
+    conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
+
+    with conn.cursor() as cur:
+        cur.execute(f"select * from testlogin")
+        res = cur.fetchall()
+        conn.commit()
+        print(res)
+    return Response(json.dumps(res), content_type="application/json")
 
 # Run the app
 if __name__ == '__main__':
