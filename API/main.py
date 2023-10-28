@@ -22,7 +22,7 @@ def login():
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
-        cur.execute(f"select * from testlogin where username='{user}'")
+        cur.execute(f"select * from users where username='{user}'")
         res = cur.fetchall()
         conn.commit()
         print(res)
