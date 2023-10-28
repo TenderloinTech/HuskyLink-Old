@@ -52,15 +52,16 @@ def create():
     return Response(json.dumps({"result": {"success": True, "message": "ok"}}), content_type="application/json")
 
 @app.route("/api/v1/listAllUsers", methods=["GET"])
-def listUsers():
+def lists():
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
+    users = []
+
     with conn.cursor() as cur:
-        cur.execute(f"select * from testlogin")
+        cur.execute(f"select username from testlogin")
         res = cur.fetchall()
         conn.commit()
-        print(res)
-    return Response(json.dumps(res), content_type="application/json")
+        return Response(json.dumps(res), content_type="application/json")
 
 # Run the app
 if __name__ == '__main__':
