@@ -28,7 +28,7 @@ def login():
         print(res)
         if len(res) != 1:
             return Response(json.dumps({"result": {"password": False}}), content_type="application/json")
-        if res[0][1] == password:
+        if res[0][2] == password:
             return Response(json.dumps({"result": {"password": True}}), content_type="application/json")
     return Response(json.dumps({"result": {"password": False, "returnedPassword": password}}), content_type="application/json")
 
