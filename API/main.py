@@ -97,7 +97,7 @@ def createReq():
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
-        cur.execute(f"insert into requests (userUniqueID, title, description, tags, createdAt, isActive, randomID) values ('{username}', '{title}', '{description}', {tags}, {createdAt}, {isActive}, {randomID})")
+        cur.execute(f"insert into requests (userUniqueID, title, description, tags, createdAt, isActive, randomID) values ('{username}', '{title}', '{description}', '{tags}', {createdAt}, {isActive}, {randomID})")
         conn.commit()
 
     return Response(json.dumps({"result": {"uniqueID": randomID}}))
