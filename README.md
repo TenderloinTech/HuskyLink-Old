@@ -1,6 +1,6 @@
 # **Husky Link!**
 
-![photo](photoshop.png)
+![photo](https://trentwil.es/thumbnail_photoshop.png)
 Husky Link is a web-app that lets you choose your coding partners anonymously!
 
 Check out our [**Website**](https://tenderloin.tech)
