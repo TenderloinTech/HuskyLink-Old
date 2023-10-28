@@ -1,6 +1,7 @@
 from flask import Flask, request, Response
 import psycopg2
 import json
+import time
 
 # Create a Flask app
 app = Flask(__name__)
@@ -34,13 +35,19 @@ def create():
 
     # Parameters Required
     user = request.form.get('username')
+    realName = request.form.get('realName')
     password = request.form.get('password')
-    
+    createdAt = round(time.time())
+    userType = request.form.get("userType")
+    profileImageURL = request.form.get("profileImageURL")
+    isBanned = False
+    userRole = request.form.get("userRole")
+
 
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
-        cur.execute(f"insert into users where username='{user}'")
+        cur.execute(f"select * from users where username='{user}'")
         res = cur.fetchall()
         conn.commit()
         if len(res) != 0:
@@ -50,7 +57,7 @@ def create():
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
-        cur.execute(f"insert into testLogin (username, pass) values ('{user}', '{password}')")
+        cur.execute(f"insert into users (username, realName, pass, createdAt, userType, profileImageURL, isBanned, userRole) values ({user}, {realName}, {password}, {createdAt}, {userType}, {profileImageURL}, {isBanned}, {userRole})")
         conn.commit()
     return Response(json.dumps({"result": {"success": True, "message": "ok"}}), content_type="application/json")
 
@@ -59,17 +66,17 @@ def lists():
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
-        cur.execute(f"select username from testlogin")
+        cur.execute(f"select username, realName, createdAt, userType, profileImageURL, isBanned, userRole from users")
         res = cur.fetchall()
         conn.commit()
         return Response(json.dumps(res), content_type="application/json")
 
-@app.route("/api/v1/sortByTag/<tag>")
-def sortTag(tag):
+@app.route("/api/v1/sortByRole/<role>")
+def sortRole(role):
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
-        cur.execute(f"select username from testlogin")
+        cur.execute(f"select username, realName, createdAt, userType, profileImageURL, isBanned, userRole from users where role='{role}'")
         res = cur.fetchall()
         conn.commit()
         return Response(json.dumps(res), content_type="application/json")
