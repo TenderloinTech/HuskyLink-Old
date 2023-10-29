@@ -7,6 +7,7 @@ Check out our [**Website**](https://tenderloin.tech)
 
 Check out our [**Instagram**](https://www.instagram.com/tenderloin.tech/)
 
+Video demo: [Here](https://trentwil.es/a/huskylink.mp4)
 
 ## What exactly is Husky Link?
 Have you ever wanted to attend hackathon, needed help with coding, or even find a coding partner?
