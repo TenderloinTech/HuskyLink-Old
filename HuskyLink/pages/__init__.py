@@ -4,3 +4,4 @@ from .profile import profile
 from .explore import explore
 from .login import login
 from .view import view
+from .user import user
