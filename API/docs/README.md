@@ -50,6 +50,7 @@ No parameters
 | createdAt | Integer | Epoch time of when user joined. |
 | userType | String | User type, admin/student/professor |
 | isBanned | Boolean | Has the user been banned/blocked from the service? |
+| profileImageURL | Boolean | Link to externally hosted profile image |
 
 ### Success Response
 
