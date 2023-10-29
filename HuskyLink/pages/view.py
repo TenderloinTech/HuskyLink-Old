@@ -4,7 +4,7 @@ import requests
 import reflex as rx
 
 
-@template(route="/view/<id>", title="View")
+@template(route="/view/<id>/", title="View")
 def explore(id) -> rx.Component:
     """The view page.
 
