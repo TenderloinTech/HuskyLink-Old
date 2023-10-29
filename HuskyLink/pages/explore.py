@@ -23,15 +23,6 @@ def explore() -> rx.Component:
     for x in r:
         rows_code.append([x[0], x[1], x[2], x[3], x[4], x[5], x[6]])
     
-    def renderer(thing: list):
-        return rx.vstack(
-            rx.text(str(thing[0])),
-            # rx.text(thing[1]),
-            # rx.text(thing[2]),
-            # rx.text(thing[4]),
-            # rx.text(thing[5]),
-            rx.button("View details")
-        )
     # def rendering(x):
     #     print(x)
     #     return rx.td(rx.vstack(
@@ -57,10 +48,7 @@ def explore() -> rx.Component:
                 ),
                 rx.tbody(
                     *[rx.tr(
-                        *[rx.td(rx.vstack(
-                                rx.text(str(item))
-                            )
-                        ) for item in row]
+                        *[rx.td(rx.vstack(rx.text(str(item)))) for item in row] + [rx.td(rx.button("Button"))]
                     ) for row in rows_code]
                 )     
             )
