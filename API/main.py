@@ -18,13 +18,23 @@ def hello_world():
 def stats():
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
+    totalUsers = 0
+
     with conn.cursor() as cur:
         cur.execute(f"select count(*) from users;")
         res = cur.fetchall()
         conn.commit()
-        print(res[0][0])
+        totalUsers = res[0][0]
 
-    return ""
+    totalRequests = 0
+
+    with conn.cursor() as cur:
+        cur.execute(f"select count(*) from requests;")
+        res = cur.fetchall()
+        conn.commit()
+        totalRequests = res[0][0]
+
+    return Response(json.dumps({"totalUsers": totalUsers, "totalRequests": totalRequests}), content_type="application/json")
     
 
 @app.route("/api/v1/login", methods=["POST"])
