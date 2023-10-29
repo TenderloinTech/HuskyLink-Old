@@ -8,6 +8,11 @@ import reflex as rx
 
 @template(route="/profile", title="Your Profile")
 def profile() -> rx.Component:
+    # print("Rendering profile page")
+    # print(State.name)
+    # print(State.password)
+    # print(State.role)
+    # print(State.is_banned)
     
     return rx.vstack(
         rx.heading("Your Profile", font_size="3em"),
