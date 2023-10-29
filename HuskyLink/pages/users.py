@@ -5,7 +5,7 @@ import requests
 import reflex as rx
 
 
-@template(route="/users", title="Explore")
+@template(route="/users", title="Explore Users")
 def users() -> rx.Component:
     """The users page.
 
