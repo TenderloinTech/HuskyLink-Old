@@ -5,7 +5,7 @@ import reflex as rx
 
 
 @template(route="/view/<id>/", title="View")
-def explore(id) -> rx.Component:
+def view(id) -> rx.Component:
     """The view page.
 
     Returns:
