@@ -189,7 +189,7 @@ def reqByID(id):
     hits = []
 
     with conn.cursor() as cur:
-        cur.execute(f"select * from requests where useruniqueid='{id}'")
+        cur.execute(f"select * from requests where useruniqueid={id}")
         res = cur.fetchall()
         conn.commit()
 
