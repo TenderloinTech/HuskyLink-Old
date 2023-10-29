@@ -56,14 +56,13 @@ def explore() -> rx.Component:
                     )
                 ),
                 rx.tbody(
-                        *[rx.tr(
-                            *[rx.td(rx.vstack(
-                                rx.text(str(item)),
-                                ))for item in row
-                            ]
-                        ) for row in rows_code]
-                        
-                    )     
+                    *[rx.tr(
+                        *[rx.td(rx.vstack(
+                                rx.text(str(item))
+                            )
+                        ) for item in row]
+                    ) for row in rows_code]
+                )     
             )
         )
     )
