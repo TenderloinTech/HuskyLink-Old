@@ -181,6 +181,24 @@ def searchRequests():
                     hits.append(x)
 
         return Response(json.dumps(hits), content_type="application/json")
+    
+@app.route("/api/v1/getRequestByID/<id>")
+def searchRequests(id):
+    conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
+
+    hits = []
+
+    with conn.cursor() as cur:
+        cur.execute(f"select * from requests where uniqueID='{id}'")
+        res = cur.fetchall()
+        conn.commit()
+
+        for x in res:
+            hits.append(x)
+
+        return Response(json.dumps(hits), content_type="application/json")
+
+
 # Run the app
 if __name__ == '__main__':
     app.run()
