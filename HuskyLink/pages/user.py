@@ -4,13 +4,14 @@ import requests
 import reflex as rx
 
 
-@template(route="/user/<name>/", title="View")
-def view(name) -> rx.Component:
+@template(route="/user/[name]/", title="User")
+def user() -> rx.Component:
     """The view page.
 
     Returns:
         The UI for the view page.
     """
+    name = "trent"
 
     r = requests.get(f"https://api.tenderloin.tech/api/v1/getUserInfo/{name}")
 

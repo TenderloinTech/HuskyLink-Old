@@ -19,22 +19,22 @@ class State(rx.State):
     loggedIn: bool = False
     joined: int = 0
     
-    @rx.var
-    def title(self):
-            return self.router.page.params.get("id", 0)
-    #     # print("id:", id)
-    #     # print("broo... check out the ID: ---> ", type(id))
-    #     # if id == 0:
-    #     #     return "unset"
-    #     # print(f"API Call to - https://api.tenderloin.tech/api/v1/getRequestByID/{id}")
-    #     # r = requests.get(f"https://api.tenderloin.tech/api/v1/getRequestByID/{id}")
-    #     # if r is not None:
-    #     #     print(r.json())
-    #     #     return r
-    #     # return "unset"
+    # @rx.var
+    # def title(self):
+    #         return self.router.page.params.get("id", 0)
+    # #     # print("id:", id)
+    # #     # print("broo... check out the ID: ---> ", type(id))
+    # #     # if id == 0:
+    # #     #     return "unset"
+    # #     # print(f"API Call to - https://api.tenderloin.tech/api/v1/getRequestByID/{id}")
+    # #     # r = requests.get(f"https://api.tenderloin.tech/api/v1/getRequestByID/{id}")
+    # #     # if r is not None:
+    # #     #     print(r.json())
+    # #     #     return r
+    # #     # return "unset"
         
-    # def getPostID(self):
-    #     return self.title
+    # # def getPostID(self):
+    # #     return self.title
     
     def loginAuth(self, form_data: dict):
         # print("form data", form_data)

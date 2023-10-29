@@ -14,13 +14,22 @@ def explore() -> rx.Component:
     """
 
     rows_code = []
-    r = requests.get("https://api.tenderloin.tech/api/v1/listRequests").json()
+    r = requests.get("https://api.tenderloin.tech/api/v1/listRequests")
+    if r.ok:
+        r = r.json()
+        for x in r:
+            if x[5]:
+                rows_code.append([x[0], x[1], ", ".join(x[3]), x[6]])
+        for x in r:
+            if x[5]:
+                rows_code.append([x[0], x[1], ", ".join(x[3]), x[6]])
+        for x in r:
+            if x[5]:
+                rows_code.append([x[0], x[1], ", ".join(x[3]), x[6]])
     print(r)
     # All we need the uniqueID for is for pages, ie /view/<id>
     # We do not need the epoch time
-    for x in r:
-        if x[5]:
-            rows_code.append([x[0], x[1], ", ".join(x[3]), x[6]])
+    
             
     return rx.vstack(
         rx.heading("Explore", font_size="3em"),
@@ -29,7 +38,9 @@ def explore() -> rx.Component:
             rx.table(
                 rx.thead(
                     rx.tr(
-                        rx.th("")
+                        rx.th("Username"),
+                        rx.th("Real Name"),
+                        rx.th("Role"),
                     )
                 ),
                 rx.tbody(

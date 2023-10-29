@@ -116,8 +116,14 @@ def sidebar() -> rx.Component:
     Returns:
         The sidebar component.
     """
+    def exclude_view_and_login(page):
+        return page["route"] not in ["/view", "/login"]
+
     # Get all the decorated pages and add them to the sidebar.
     from reflex.page import get_decorated_pages
+    pages = list(filter(exclude_view_and_login, get_decorated_pages()))
+    print("\n\n\nPAGES = ", pages, "\n\n\n")
+
     return rx.box(
         rx.vstack(
             sidebar_header(),
@@ -128,7 +134,7 @@ def sidebar() -> rx.Component:
                         icon=page.get("image", "/github.svg"),
                         url=page["route"],
                     )
-                    for page in get_decorated_pages()
+                    for page in pages
                 ],
                 width="100%",
                 overflow_y="auto",
