@@ -17,6 +17,7 @@ class State(rx.State):
     profile_image: str = ""
     is_banned: bool = False
     loggedIn: bool = False
+    joined: int = 0
     
     
     def loginAuth(self, form_data: dict):
@@ -31,7 +32,8 @@ class State(rx.State):
             results = requests.get(f"https://api.tenderloin.tech/api/v1/getUserInfo/{self.username}")  
             
             self.name = results.json()[0][1]      
-            self.role = results.json()[0][2]      
+            self.role = results.json()[0][3]
+            self.joined = results.json()[0][2]      
             self.profile_image = results.json()[0][4]
             self.is_banned = results.json()[0][5]  
             
