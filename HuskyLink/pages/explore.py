@@ -20,7 +20,7 @@ def explore() -> rx.Component:
     # We do not need the epoch time
     for x in r:
         if x[5]:
-            rows_code.append([x[0], x[1], ", ".join(x[3])])
+            rows_code.append([x[0], x[1], ", ".join(x[3]), x[6]])
     # for x in r:
     #     rows_code.append([x[0], x[1], x[2], x[3], x[4], x[5], x[6]])
     # for x in r:
@@ -51,7 +51,7 @@ def explore() -> rx.Component:
                 ),
                 rx.tbody(
                     *[rx.tr(
-                        *[rx.td(rx.vstack(rx.text(str(item)))) for item in row] + [rx.td(rx.button("Button"))]
+                        *[rx.td(rx.vstack(rx.text(str(item)))) for item in row[:-1]] + [rx.td(rx.link(rx.button("Button"), href=f"/view/{row[3]}"))]
                     ) for row in rows_code]
                 )     
             )
