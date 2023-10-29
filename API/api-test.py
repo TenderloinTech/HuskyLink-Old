@@ -12,8 +12,8 @@ print(testLogin("sj", "s")) # Expected to return False
 print(testLogin("james", "s")) # Expected to return False
 print(testLogin("james", "admin123")) # Expected to return True
 
-def testCreateAccount(user, password, realName, userType, profileImageURL):
-    r = requests.post(f"http://{endpoint}:5000/api/v1/createAccount", data={"username": user, "password": password, "realName": realName, "userType": userType, "profileImageURL": profileImageURL})
+def testCreateAccount(user, password, email, realName, userType, profileImageURL):
+    r = requests.post(f"http://{endpoint}:5000/api/v1/createAccount", data={"username": user, "password": password, "realName": realName, "userType": userType, "profileImageURL": profileImageURL, "email": email})
     return r.text
 
 print(testCreateAccount("trent", "demo123", "Trent Wiles", "student", "https://trentwil.es/a/FI3S64vsT4.png")) # Expected to return "Username exists"

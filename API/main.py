@@ -39,6 +39,7 @@ def create():
     user = request.form.get('username')
     realName = request.form.get('realName')
     password = request.form.get('password')
+    email = request.form.get('email')
     createdAt = round(time.time())
     userType = request.form.get("userType")
     profileImageURL = request.form.get("profileImageURL")
@@ -58,7 +59,7 @@ def create():
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
-        cur.execute(f"insert into users (username, realName, pass, createdAt, userType, profileImageURL, isBanned) values ('{user}', '{realName}', '{password}', {createdAt}, '{userType}', '{profileImageURL}', {isBanned})")
+        cur.execute(f"insert into users (username, realName, pass, createdAt, userType, profileImageURL, isBanned, email) values ('{user}', '{realName}', '{password}', {createdAt}, '{userType}', '{profileImageURL}', {isBanned}, '{email}')")
         conn.commit()
     return Response(json.dumps({"result": {"success": True, "message": "ok", "createdAt": createdAt}}), content_type="application/json")
 

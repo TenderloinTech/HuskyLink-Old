@@ -19,7 +19,7 @@ def users() -> rx.Component:
     # All we need the uniqueID for is for pages, ie /view/<id>
     # We do not need the epoch time
     for x in r:
-        rows_code.append([x[0], x[1], ", ".join(x[3]), x[6]])
+        rows_code.append([x[0], x[1], x[3].upper(), x[6]])
     # for x in r:
     #     rows_code.append([x[0], x[1], x[2], x[3], x[4], x[5], x[6]])
     # for x in r:
@@ -50,7 +50,7 @@ def users() -> rx.Component:
                 ),
                 rx.tbody(
                     *[rx.tr(
-                        *[rx.td(rx.vstack(rx.text(str(item)))) for item in row[:-1]] + [rx.td(rx.link(rx.button("Button"), href=f"/user/{row[3]}"))]
+                        *[rx.td(rx.vstack(rx.text(str(item)))) for item in row[:-1]] + [rx.td(rx.link(rx.button("View Profile"), href=f"/user/{row[3]}"))]
                     ) for row in rows_code]
                 )     
             )
