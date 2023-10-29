@@ -143,24 +143,25 @@ def sortRequests():
 
         return Response(json.dumps(hits), content_type="application/json")
 
+@app.route("/api/v1/searchRequests")
+def searchRequests():
+    search = request.args.get("q")
 
-# @app.route("/api/v1/sortRequestsByTags") # ?tags=this,this,and,that
-# def sortByTags():
-#     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
+    conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
-#     listOfTags = request.args.get("tags").split(",")
+    hits = []
 
-#     with conn.cursor() as cur:
-#         cur.execute(f"select * from requests")
-#         res = cur.fetchall()
-#         conn.commit()
+    with conn.cursor() as cur:
+        cur.execute(f"select * from requests")
+        res = cur.fetchall()
+        conn.commit()
 
-#         for x in res:
-#             if x[]
+        for x in res:
+            if search in x[0] or search in x[1]:
+                if x not in hits:
+                    hits.append(x)
 
-#         return Response(json.dumps(res), content_type="application/json")
-
-
+        return Response(json.dumps(hits), content_type="application/json")
 # Run the app
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
