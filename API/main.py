@@ -79,7 +79,7 @@ def lists():
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
-        cur.execute(f"select username, realName, createdAt, userType, profileImageURL, isBanned, userRole from users")
+        cur.execute(f"select username, realName, createdAt, userType, profileImageURL, isBanned, userRole, email from users")
         res = cur.fetchall()
         conn.commit()
         return Response(json.dumps(res), content_type="application/json")
