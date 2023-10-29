@@ -1,0 +1,14 @@
+body{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+input{
+    background-color: rgb(241, 226, 226);
+    border-radius: 8px;
+    transition: 0.5s;
+}
+h1{
+    color: rgb(196, 13, 13);
+}
+.padded{
+    padding-left: 50px;
+}

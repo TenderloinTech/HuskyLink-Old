@@ -43,7 +43,6 @@ def create():
     userType = request.form.get("userType")
     profileImageURL = request.form.get("profileImageURL")
     isBanned = False
-    userRole = request.form.get("userRole")
 
 
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
@@ -84,12 +83,12 @@ def lists():
         conn.commit()
         return Response(json.dumps(res), content_type="application/json")
 
-@app.route("/api/v1/sortByRole/<role>")
+@app.route("/api/v1/sortByUserType/<role>")
 def sortRole(role):
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     with conn.cursor() as cur:
-        cur.execute(f"select username, realName, createdAt, userType, profileImageURL, isBanned, userRole from users where role='{role}'")
+        cur.execute(f"select username, realName, createdAt, userType, profileImageURL, isBanned, userRole from users where userType='{role}'")
         res = cur.fetchall()
         conn.commit()
         return Response(json.dumps(res), content_type="application/json")
@@ -118,7 +117,7 @@ def searchUsers():
 def createReq():
     # Request params
 
-    username = request.form.get('uniqueUserID')
+    username = request.form.get('username')
     title = request.form.get("title")
     description = request.form.get("description")
     tags = request.form.get("tags")
@@ -184,4 +183,4 @@ def searchRequests():
         return Response(json.dumps(hits), content_type="application/json")
 # Run the app
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run()
