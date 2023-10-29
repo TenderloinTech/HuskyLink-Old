@@ -43,8 +43,8 @@ class State(rx.State):
             print("is banned:", self.is_banned)
             
               
-            print("redirecting to profile")        
-            return rx.redirect("/profile")
+            print("login successful, redirecting to explore")        
+            return rx.redirect("/explore")
         
     pass
 
