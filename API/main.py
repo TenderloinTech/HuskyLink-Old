@@ -193,6 +193,8 @@ def reqByID(id):
         res = cur.fetchall()
         conn.commit()
 
+        print(res)
+
         for x in res:
             hits.append(x)
 
