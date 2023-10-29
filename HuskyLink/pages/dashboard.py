@@ -26,5 +26,5 @@ def dashboard() -> rx.Component:
         rx.heading("Dashboard", font_size="3em"),
         rx.heading(f"Total Requests: {total_requests}", font_size="2em"),
         rx.heading(f"Total Users: {total_users}", font_size="2em"),
-        rx.button("Add Request"),
+        rx.link(rx.button("Add Request"), href="/add_request"),
     )

@@ -12,13 +12,12 @@ def sidebar_header() -> rx.Component:
     Returns:
         The sidebar header component.
     """
-    return rx.hstack(
+    return rx.vstack(
         # The logo.
         rx.image(
-            src="/icon.svg",
-            height="2em",
+            src="/logo.png",
+            height="10em",
         ),
-        rx.spacer(),
         # Link to Reflex GitHub repo.
         rx.link(
             rx.center(
@@ -34,7 +33,7 @@ def sidebar_header() -> rx.Component:
                     "bg": styles.accent_color,
                 },
             ),
-            href="https://github.com/reflex-dev/reflex",
+            href="https://github.com/TenderloinTech/HuskyLink",
         ),
         width="100%",
         border_bottom=styles.border,
