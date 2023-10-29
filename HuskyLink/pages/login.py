@@ -3,18 +3,13 @@ from HuskyLink.templates import template
 from HuskyLink.state import State
 import reflex as rx
 
-@template(route="/login", title="Login")
+@rx.page(route="/", title="Login")
 def login() -> rx.Component:
     """The dashboard page.
 
     Returns:
         The UI for the dashboard page.
     """
-    if State.loggedIn is True:
-        print("reached state.loggedIn in login.py")
-        return rx.vstack(
-            rx.heading("You are Logged In")
-        )
 
     return rx.vstack(
     rx.form(

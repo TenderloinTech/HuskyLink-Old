@@ -118,7 +118,6 @@ def sidebar() -> rx.Component:
     """
     # Get all the decorated pages and add them to the sidebar.
     from reflex.page import get_decorated_pages
-
     return rx.box(
         rx.vstack(
             sidebar_header(),
