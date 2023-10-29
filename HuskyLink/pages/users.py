@@ -15,7 +15,7 @@ def users() -> rx.Component:
 
     rows_code = []
     r = requests.get("https://api.tenderloin.tech/api/v1/listAllUsers").json()
-    print(r)
+    # print(r)
     # All we need the uniqueID for is for pages, ie /view/<id>
     # We do not need the epoch time
     for x in r:

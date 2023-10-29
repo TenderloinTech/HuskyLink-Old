@@ -12,13 +12,12 @@ def sidebar_header() -> rx.Component:
     Returns:
         The sidebar header component.
     """
-    return rx.hstack(
+    return rx.vstack(
         # The logo.
         rx.image(
-            src="/icon.svg",
-            height="2em",
+            src="/logo.png",
+            height="10em",
         ),
-        rx.spacer(),
         # Link to Reflex GitHub repo.
         rx.link(
             rx.center(
@@ -34,7 +33,7 @@ def sidebar_header() -> rx.Component:
                     "bg": styles.accent_color,
                 },
             ),
-            href="https://github.com/reflex-dev/reflex",
+            href="https://github.com/TenderloinTech/HuskyLink",
         ),
         width="100%",
         border_bottom=styles.border,
@@ -122,13 +121,15 @@ def sidebar() -> rx.Component:
     # print("\n\n\nPAGES = ", pages, "\n\n\n")
 
     routes = [
-        {"title": "Dashboard", "route": "/dashboard"},
-        {"title": "Explore", "route": "/explore"},
-        {"title": "Create Account", "route": "/create_account"},
-        {"title": "Login", "route": "/"},
-        {"title": "Your Profile", "route": "/profile"},
-        {"title": "Explore Users", "route": "/users"}
+        {"title": "Dashboard", "route": "/dashboard", "image": "dashboard.svg"},
+        {"title": "Explore", "route": "/explore", "image": "explore.svg"},
+        # {"title": "Create Account", "route": "/create_account", },
+        # {"title": "Login", "route": "/"},
+        {"title": "Your Profile", "route": "/profile", "image": "userprofile.svg"},
+        {"title": "Explore Users", "route": "/users", "image": "users.svg"},
     ]
+    
+    
     
     return rx.box(
         rx.vstack(
@@ -137,7 +138,7 @@ def sidebar() -> rx.Component:
                 *[
                     sidebar_item(
                         text=page.get("title", page["route"].strip("/").capitalize()),
-                        icon=page.get("image", "/github.svg"),
+                        icon="",
                         url=page["route"],
                     )
                     for page in routes
@@ -147,8 +148,6 @@ def sidebar() -> rx.Component:
                 align_items="flex-start",
                 padding="1em",
             ),
-            rx.spacer(),
-            sidebar_footer(),
             height="100dvh",
         ),
         display=["none", "none", "block"],
