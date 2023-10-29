@@ -2,13 +2,10 @@
 
 from HuskyLink.templates import template
 from HuskyLink.state import State
-import datetime
+# import datetime
 
 import reflex as rx
 
-def convertTime(ogTime):
-    timestamp = datetime.datetime.fromtimestamp(ogTime)
-    return timestamp.strftime('%Y-%m-%d %H:%M:%S')
 
 
 
@@ -20,12 +17,19 @@ def profile() -> rx.Component:
     # print(State.role)
     # print(State.is_banned)
     
+    # def convertTime(ogTime):
+    #     timestamp = datetime.datetime.fromtimestamp(ogTime)
+    #     return timestamp.strftime('%Y-%m-%d %H:%M:%S')
+    
+    
     return rx.vstack(
         rx.heading("Your Profile", font_size="3em"),
         rx.text("Welcome to Reflex!"),
+        rx.image(src=f"{State.profile_image}",    width="auto",
+    height="200px",
+    box_shadow="lg",),
         rx.text(f"Name: {State.name}"),  # add text fields for first and last name
-        rx.text(f"Password: {len(str(State.password)) | 0}"),  # add text field for password
-        rx.text(f"Date joined: {convertTime(State.joined)}"),
+        rx.text(f"Password: {len(str(State.password)) | 0} Characters"),  # add text field for password
         rx.text(f"Role: {State.role}"),
         rx.text(f"Is banned? {State.is_banned}"),
         rx.button("Save Changes", color="primary", size="lg"),
