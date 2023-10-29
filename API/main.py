@@ -12,11 +12,11 @@ app = Flask(__name__)
 # Define a route
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return Response(json.dumps({"online": True}), content_type="application/json")
 
 @app.route("/api/v1/login", methods=["POST"])
 def login():
-    user = request.form.get('username')
+    user = request.form.get('username').lower()
     password = request.form.get('password')
 
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
@@ -96,7 +96,7 @@ def sortRole(role):
 
 @app.route("/api/v1/searchUsers")
 def searchUsers():
-    q = request.args.get("q")
+    q = request.args.get("q").lower()
 
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
