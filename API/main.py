@@ -14,6 +14,19 @@ app = Flask(__name__)
 def hello_world():
     return Response(json.dumps({"online": True}), content_type="application/json")
 
+@app.route('/api/v1/getStats')
+def stats():
+    conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
+
+    with conn.cursor() as cur:
+        cur.execute(f"select count(*) from users;")
+        res = cur.fetchall()
+        conn.commit()
+        print(res)
+
+    return ""
+    
+
 @app.route("/api/v1/login", methods=["POST"])
 def login():
     user = request.form.get('username').lower()
