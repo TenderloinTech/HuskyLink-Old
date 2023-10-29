@@ -137,6 +137,7 @@ def sortRequests():
         conn.commit()
 
         for x in res:
+            print(x)
             for y in x[4]:
                 if y in tags:
                     hits.append(x)
