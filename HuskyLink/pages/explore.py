@@ -33,13 +33,13 @@ def explore() -> rx.Component:
                 rx.thead(
                     rx.tr(
                         rx.th("Username"),
-                        rx.th("Real Name"),
-                        rx.th("Role"),
+                        rx.th("Title"),
+                        rx.th("Tags"),
                     )
                 ),
                 rx.tbody(
                     *[rx.tr(
-                        *[rx.td(rx.vstack(rx.text(str(item)))) for item in row[:-1]] + [rx.td(rx.link(rx.button("Button"), href=f"/view/{row[3]}"))]
+                        *[rx.td(rx.vstack(rx.text(str(item)))) for item in row[:-1]] + [rx.td(rx.link(rx.button("View Details"), href=f"/view/{row[3]}"))]
                     ) for row in rows_code]
                 )     
             )

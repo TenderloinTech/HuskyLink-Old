@@ -11,7 +11,7 @@ class State(rx.State):
     
     username: str = ""
     password: str = ""
-    name: str = ""
+    fullname: str = ""
     createdAtTime: int = 0
     role: str = ""
     profile_image: str = ""
@@ -46,8 +46,9 @@ class State(rx.State):
         if r.json()["result"]["password"] is True:
             self.loggedIn = True
             results = requests.get(f"https://api.tenderloin.tech/api/v1/getUserInfo/{self.username}")  
-            
-            self.name = results.json()[0][1]      
+            print(results.json())
+            self.fullname = results.json()[0][1]      
+            print("name:", results.json()[0][1])
             self.role = results.json()[0][3]
             self.joined = results.json()[0][2]      
             self.profile_image = results.json()[0][4]
@@ -60,7 +61,7 @@ class State(rx.State):
             
               
             print("login successful, redirecting to explore")        
-            return rx.redirect("/explore")
+            return rx.redirect("/dashboard")
         
     pass
 

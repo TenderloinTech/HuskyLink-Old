@@ -11,7 +11,7 @@ def user() -> rx.Component:
     Returns:
         The UI for the view page.
     """
-    name = "trent"
+    name = "gupta87"
 
     r = requests.get(f"https://api.tenderloin.tech/api/v1/getUserInfo/{name}")
 
