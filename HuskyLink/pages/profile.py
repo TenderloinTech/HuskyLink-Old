@@ -1,6 +1,7 @@
 """The profile page for a user."""
 
 from HuskyLink.templates import template
+from HuskyLink.state import State
 
 import reflex as rx
 
@@ -11,13 +12,9 @@ def profile() -> rx.Component:
     return rx.vstack(
         rx.heading("Your Profile", font_size="3em"),
         rx.text("Welcome to Reflex!"),
-        rx.text("Name:"),  # add text fields for first and last name
-        rx.text("Email:"),  # add text field for email
-        rx.text("Password:"),  # add text field for password
-        rx.text("Phone Number:"),  # add text field for phone number
-        rx.text("Grade:"),  # add text field for grade
-        rx.text("Major:"),  # add text field for major
-        rx.text("Interests:"),  # add text field for interests
-        rx.text("Bio:"),  # add text field for bio
+        rx.text(f"Name: {State.name}"),  # add text fields for first and last name
+        rx.text(f"Password: {len(str(State.password)) | 0}"),  # add text field for password
+        rx.text(f"Role: {State.role}"),
+        rx.text(f"Is banned? {State.is_banned}"),
         rx.button("Save Changes", color="primary", size="lg"),
     )
