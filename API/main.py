@@ -12,11 +12,11 @@ app = Flask(__name__)
 # Define a route
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return Response(json.dumps({"online": True}), content_type="application/json")
 
 @app.route("/api/v1/login", methods=["POST"])
 def login():
-    user = request.form.get('username')
+    user = request.form.get('username').lower()
     password = request.form.get('password')
 
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
@@ -94,6 +94,26 @@ def sortRole(role):
         conn.commit()
         return Response(json.dumps(res), content_type="application/json")
 
+@app.route("/api/v1/searchUsers")
+def searchUsers():
+    q = request.args.get("q").lower()
+
+    conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
+
+    hits = []
+
+    with conn.cursor() as cur:
+        cur.execute(f"select * from requests")
+        res = cur.fetchall()
+        conn.commit()
+
+        for x in res:
+            if q in x[0] or q in x[1]:
+                if x not in hits:
+                    hits.append(x)
+
+        return Response(json.dumps(hits), content_type="application/json")
+
 @app.route("/api/v1/createNewRequest", methods=["POST"])
 def createReq():
     # Request params
@@ -124,23 +144,44 @@ def listRequests():
         conn.commit()
         return Response(json.dumps(res), content_type="application/json")
 
-# @app.route("/api/v1/sortRequestsByTags") # ?tags=this,this,and,that
-# def sortByTags():
-#     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
+@app.route("/api/v1/sortRequestsByTag") # ?tags=tag1,tag2
+def sortRequests():
+    tags = request.args.get("tags").split(",")
+    conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
-#     listOfTags = request.args.get("tags").split(",")
+    hits = []
 
-#     with conn.cursor() as cur:
-#         cur.execute(f"select * from requests")
-#         res = cur.fetchall()
-#         conn.commit()
+    with conn.cursor() as cur:
+        cur.execute(f"select * from requests")
+        res = cur.fetchall()
+        conn.commit()
 
-#         for x in res:
-#             if x[]
+        for x in res:
+            for y in x[3]:
+                if y in tags and x not in hits:
+                    hits.append(x)
 
-#         return Response(json.dumps(res), content_type="application/json")
+        return Response(json.dumps(hits), content_type="application/json")
 
+@app.route("/api/v1/searchRequests")
+def searchRequests():
+    search = request.args.get("q")
 
+    conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
+
+    hits = []
+
+    with conn.cursor() as cur:
+        cur.execute(f"select * from requests")
+        res = cur.fetchall()
+        conn.commit()
+
+        for x in res:
+            if search in x[0] or search in x[1]:
+                if x not in hits:
+                    hits.append(x)
+
+        return Response(json.dumps(hits), content_type="application/json")
 # Run the app
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run()
