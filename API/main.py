@@ -183,7 +183,7 @@ def searchRequests():
         return Response(json.dumps(hits), content_type="application/json")
     
 @app.route("/api/v1/getRequestByID/<id>")
-def searchRequests(id):
+def reqByID(id):
     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
 
     hits = []
