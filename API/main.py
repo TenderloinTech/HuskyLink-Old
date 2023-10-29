@@ -138,7 +138,7 @@ def sortRequests():
 
         for x in res:
             for y in x[3]:
-                if y in tags:
+                if y in tags and x not in hits:
                     hits.append(x)
 
         return Response(json.dumps(hits), content_type="application/json")
