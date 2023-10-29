@@ -22,7 +22,7 @@ def stats():
         cur.execute(f"select count(*) from users;")
         res = cur.fetchall()
         conn.commit()
-        print(res)
+        print(res[0][0])
 
     return ""
     
