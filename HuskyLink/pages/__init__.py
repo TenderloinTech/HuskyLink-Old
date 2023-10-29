@@ -6,3 +6,4 @@ from .login import login
 from .view import view
 from .user import user
 from .users import users
+from .create_account import create_account
