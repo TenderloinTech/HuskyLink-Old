@@ -42,6 +42,7 @@ def users() -> rx.Component:
     return rx.vstack(
         rx.heading("Explore", font_size="3em"),
         rx.text("View all users on the HuskyLink network"),
+        rx.card(
         rx.table_container(
             rx.table(
                 rx.thead(
@@ -55,5 +56,6 @@ def users() -> rx.Component:
                     ) for row in rows_code]
                 )     
             )
+        )
         )
     )
