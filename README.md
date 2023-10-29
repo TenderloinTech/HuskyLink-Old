@@ -1,7 +1,7 @@
 # **Husky Link!**
 
 ![](https://trentwil.es/a/thumbnail_photoshop.png?dsfsdf)
-Husky Link is a web-app that lets you choose your coding partners anonymously!
+Husky Link is a web-app that lets you choose your coding partners easily!
 
 Check out our [**Website**](https://tenderloin.tech)
 
