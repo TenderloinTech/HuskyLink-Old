@@ -124,6 +124,26 @@ def listRequests():
         conn.commit()
         return Response(json.dumps(res), content_type="application/json")
 
+@app.route("/api/v1/sortRequestsByTag") # ?tags=tag1,tag2
+def sortRequests():
+    tags = request.args.get("tags").split(",")
+    conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
+
+    hits = []
+
+    with conn.cursor() as cur:
+        cur.execute(f"select * from requests")
+        res = cur.fetchall()
+        conn.commit()
+
+        for x in res:
+            for y in x[4]:
+                if y in tags:
+                    hits.append(x)
+
+        return Response(json.dumps(hits), content_type="application/json")
+
+
 # @app.route("/api/v1/sortRequestsByTags") # ?tags=this,this,and,that
 # def sortByTags():
 #     conn = psycopg2.connect(json.loads(open("API/config.json").read())["cockroach"])
