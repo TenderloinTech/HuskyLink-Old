@@ -25,5 +25,6 @@ def login() -> rx.Component:
         rx.input(id="password", placeholder="Password", size="lg"),
     ),
     rx.button("Login", color="primary", size="lg", type_="submit")
-    ), on_submit=State.loginAuth, )
+    ), on_submit=State.loginAuth, ),
+    rx.link(rx.text("Don't have an account? Create one here!"), href="/create_account", text="Login"),
 )

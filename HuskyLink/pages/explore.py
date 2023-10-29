@@ -19,14 +19,8 @@ def explore() -> rx.Component:
         r = r.json()
         for x in r:
             if x[5]:
-                rows_code.append([x[0], x[1], ", ".join(x[3]), x[6]])
-        for x in r:
-            if x[5]:
-                rows_code.append([x[0], x[1], ", ".join(x[3]), x[6]])
-        for x in r:
-            if x[5]:
-                rows_code.append([x[0], x[1], ", ".join(x[3]), x[6]])
-    print(r)
+                rows_code.append([x[0], x[1], ", ".join(x[3]), x[len(x)-1]])
+    # print(r)
     # All we need the uniqueID for is for pages, ie /view/<id>
     # We do not need the epoch time
     

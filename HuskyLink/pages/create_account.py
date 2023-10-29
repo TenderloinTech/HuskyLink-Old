@@ -36,33 +36,38 @@ def create_account() -> rx.Component:
     
     return rx.vstack(
         rx.form(
-        rx.vstack(
-        rx.heading("Login Page", font_size="3em"),
-        rx.text("Please log in!"),
-        rx.hstack(
-            rx.text("Username:"),  # add text field for username
-            rx.input(id="username", placeholder="Username", size="lg"),
-        ),
-        rx.hstack(
-            rx.text("Password:"),  # add text field for password
-            rx.input(id="password", placeholder="Password", size="lg"),
-        ),
-        rx.hstack(
-            rx.text("Full Name:"),  # add text field for password
-            rx.input(id="full_name", placeholder="Full Name", size="lg"),
-        ),
-        rx.hstack(
-            rx.text("Email:"),  # add text field for password
-            rx.input(id="email", placeholder="Email", size="lg"),
-        ),
-        rx.radio_group(
-            options,
-            on_change=createAccountState.set_text,
-        ),
-        rx.hstack(
-            rx.text("URL for profile Image:"),  # add text field for password
-            rx.input(id="pfp_link", placeholder="URL to Image", size="lg"),
-        ),
-        rx.button("Login", color="primary", size="lg", type_="submit")
-    ), on_submit=createAccountState.createAccount)
+            rx.vstack(
+            rx.heading("Create Account", font_size="3em"),
+            rx.hstack(
+                rx.text("Username:"),  # add text field for username
+                rx.input(id="username", placeholder="Username", size="lg"),
+            ),
+            rx.hstack(
+                rx.text("Password:"),  # add text field for password
+                rx.input(id="password", placeholder="Password", size="lg"),
+            ),
+            rx.hstack(
+                rx.text("Full Name:"),  # add text field for password
+                rx.input(id="full_name", placeholder="Full Name", size="lg"),
+            ),
+            rx.hstack(
+                rx.text("Email:"),  # add text field for password
+                rx.input(id="email", placeholder="Email", size="lg"),
+            ),
+            rx.radio_group(
+                options,
+                on_change=createAccountState.set_text,
+            ),
+            rx.hstack(
+                rx.text("URL for profile Image:"),  # add text field for password
+                rx.input(id="pfp_link", placeholder="URL to Image", size="lg"),
+            ),
+            rx.link(
+                rx.button("Login"),
+                href="/explore", 
+                text="Create Account"
+            ),
+            rx.link(rx.text("Already have an account? Login here!"), href="/", text="Login"),
+        )
     )
+)

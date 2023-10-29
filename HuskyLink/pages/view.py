@@ -20,10 +20,10 @@ def view() -> rx.Component:
     good_time: int = 0
     
     r = requests.get(f"https://api.tenderloin.tech/api/v1/getRequestByID/{id_savior_of_all}")
-    print("response = ", r)
+    # print("response = ", r)
     if r.ok:
         data = r.json()
-        print("RESPONSE IN VIEW.PY API CALL IS: ", data)
+        # print("RESPONSE IN VIEW.PY API CALL IS: ", data)
         if data:
             user_name = data[0][0]
             title = data[0][1]
